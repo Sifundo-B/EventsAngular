@@ -1,0 +1,38 @@
+
+<div class="container">
+  <div  class="subscription-update-container" *ngIf="isLoading">
+      <p>Loading...</p>
+    </div>
+    
+    <div class="name" *ngIf="!isLoading">
+      <div  *ngIf="currentPlan">
+        <h1 style="margin-left: 60px;font-size: 30px;padding-top: 30px;">Update Subscription Plan</h1>
+        <p style="padding-top: 30px;font-size: 30px;font-weight: normal;margin-left: 10px;"><strong style="font-weight: 400;">Plan Name:</strong> {{ currentPlan.planName }}
+          <h3 style="font-weight: lighter;font-size: 25px;margin-left: 10px;margin-top: 30px;">Benefits</h3>
+          <ul>
+            <li *ngFor="let feature of currentPlan.features">{{ feature.name }}</li>
+          </ul>
+        </div>
+      </div>
+    
+      <div class="select">
+        <h2 style="margin-left: 10px;">Select a New Subscription Plan</h2>
+        <select [(ngModel)]="newPlanId" style="margin-left: 10px;border-radius: 5px;margin-top: 10px;background-color: rgb(6, 6, 75);">
+          <option [value]="0" disabled>Select a plan...</option>
+          <option *ngFor="let plan of subscriptionPlans" [value]="plan.id">
+            {{ plan.planName }} - {{ plan.duration }}
+          </option>
+        </select>
+      </div>
+      <button (click)="updatePlan(newPlanId)"  routerLink="/user-subscription">Update Subscription</button>
+    
+      <div *ngIf="successMessage" class="success-message">
+        {{ successMessage }}
+      </div>
+    
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+    </div>
+  
+  

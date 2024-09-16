@@ -1,0 +1,7 @@
+<div *ngIf="event" class="payment-page">
+  <h2>Complete your purchase for {{ event.name }}</h2>
+  <p><strong>Ticket Type:</strong> {{ ticketType }}</p>
+  <p><strong>Price:</strong> ${{ event.price }}</p>
+
+  <button (click)="makePayment()">Pay Now</button>
+</div>

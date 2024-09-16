@@ -1,0 +1,15 @@
+<div *ngIf="event" class="ticket-options">
+    <h2>{{ event.name }}</h2>
+    <p>{{ event.date | date: 'fullDate' }}</p>
+    <p>{{ event.address }}</p>
+  
+    <h3>Select Ticket Type</h3>
+    <!-- <select [(ngModel)]="selectedTicketType">
+      <option *ngFor="let type of event.ticketTypes" [ngValue]="type">
+        {{ type.type }} - ${{ type.price }}
+      </option>
+    </select> -->
+  
+    <button (click)="proceedToPayment()" [disabled]="!selectedTicketType">Proceed to Payment</button>
+  </div>
+  

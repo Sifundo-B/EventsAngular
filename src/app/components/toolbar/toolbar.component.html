@@ -1,0 +1,91 @@
+
+<nav *ngIf="isLoggedIn" class="fixed bottom-0">
+    <div class="nav" style="background-color: rgb(26, 3, 77);margin-top: 5px;">  
+        <div class="tab" >     
+            <button routerLink="/home" data-tooltip-target="tooltip-home" type="button">
+            <svg   class="w-5 h-5 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path  fill="#DAE0F2"  d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
+            </svg>
+            </button>
+
+        </div>     
+        <div *ngIf="isAttendeeOrOrganizer()" class="tab">
+            <button routerLink="/manage-events" data-tooltip-target="tooltip-manage" type="button">
+            <svg class="w-7 h-7 mb-1 text-white group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 2v14H5V5h14z"/>
+              <path d="M8 11h4v2H8v-2zm0 4h4v2H8v-2zm0 4h4v2H8v-2zm10-6h-4v2h4v-2zm0 4h-4v2h4v-2zM11.5 16.5l1.25 1.25L20 12l-1.25-1.25-7.25 7.25L11.5 16.5z"/>
+            </svg>
+            </button>
+        </div>        
+
+        <div id="tooltip-manage" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+            Manage
+            <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+
+        <!-- DropDown for Organizer or Admin -->
+        <div *ngIf="isAttendeeOrOrganizer()" class="flex items-center justify-center mx-4 md:hidden">
+                <button (click)="toggleDropdown()" data-tooltip-target="tooltip-new" type="button" class="inline-flex items-center justify-center w-10 h-10 font-medium bg-purple-900 rounded-full hover:bg-black-700 group focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800" 
+                    [ngClass]="{'rotate-180': !isDropdownOpen}">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="#DAE0F2" viewBox="0 0 448 512" class="w-6 h-6 text-white" aria-hidden="true">
+                        <path   d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"/>
+                      </svg>
+                <span class="sr-only">Manage</span>
+                </button>
+            
+                <div *ngIf="isDropdownOpen" class="absolute left-1/2 transform -translate-x-1/2 w-48 bottom-16 bg-white text-blue-800 rounded-lg shadow-lg py-2">
+                    <a *ngIf="isAttendeeOrOrganizer()" (click)="closeDropdown()" routerLink="create" class="block px-4 py-2 hover:bg-black-100">Create Event</a>
+                    <a *ngIf="isAttendeeOrOrganizer()" (click)="closeDropdown()" routerLink="calendar" class="block px-4 py-2 hover:bg-black-100">Calendar</a>
+
+                </div>
+                <div id="tooltip-new" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">          
+                    Manage
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+        </div> 
+   
+            <!-- Notification Toolbar -->
+            <div class="tab">
+                <button routerLink="/notification" data-tooltip-target="tooltip-notification" type="button" class="relative">
+                    <svg class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill="#DAE0F2" d="M17.133 12.632v-1.8a5.407 5.407 0 0 0-4.154-5.262.955.955 0 0 0 .021-.106V3.1a1 1 0 0 0-2 0v2.364a.933.933 0 0 0 .021.106 5.406 5.406 0 0 0-4.154 5.262v1.8C6.867 15.018 5 15.614 5 16.807 5 17.4 5 18 5.538 18h12.924C19 18 19 17.4 19 16.807c0-1.193-1.867-1.789-1.867-4.175Zm-13.267-.8a1 1 0 0 1-1-1 9.424 9.424 0 0 1 2.517-6.391A1.001 1.001 0 1 1 6.854 5.8a7.43 7.43 0 0 0-1.988 5.037 1 1 0 0 1-1 .995Zm16.268 0a1 1 0 0 1-1-1A7.431 7.431 0 0 0 17.146 5.8a1 1 0 0 1 1.471-1.354 9.424 9.424 0 0 1 2.517 6.391 1 1 0 0 1-1 .995ZM8.823 19a3.453 3.453 0 0 0 6.354 0H8.823Z"/>
+                    </svg>
+                    <span *ngIf="unreadCount > 0" class="badge">{{ unreadCount }}</span>
+                </button>
+                <div id="tooltip-notification" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                    Notification
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+            </div>
+            
+
+        <div *ngIf="onlyAttendee()" class="tab">
+            <!-- Logout tooltip -->
+            <button data-tooltip-target="tooltip-calendar" type="button" routerLink="/calendar">
+                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M5 5a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1 2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a2 2 0 0 1 2-2ZM3 19v-7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm6.01-6a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm-10 4a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z" clip-rule="evenodd"/>
+                  </svg>                          
+              </button>
+        <div id="tooltip-calendar" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700" >
+            Calendar
+            <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+        </div>
+
+        
+        <div class="tab">
+            <!-- Profile tooltip -->
+            <button routerLink="/profile" data-tooltip-target="tooltip-profile" type="button">
+            <svg class="w-5 h-5 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path fill="#DAE0F2"  d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"/>
+            </svg>
+        </button>
+        <div id="tooltip-profile" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+            Profile
+            <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+
+        </div>
+       
+    </div>
+</nav>

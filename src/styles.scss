@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.leaflet-top,
+.leaflet-bottom {
+	display: none !important;
+	}
+@layer base {
+  body {
+    background: linear-gradient(rgb(8, 46, 183), rgb(26, 26, 26));
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    // color: white; // Optional: Set default text color to improve readability
+  }
+
+  /* Ensures the html tag also covers the entire viewport */
+  html {
+    min-height: 100%;
+  }
+}
+
+// To use the CSS of leaflet
+@import url('https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css');
+
+// Override the marker icon and shadow URLs
+.leaflet-container .leaflet-marker-icon,
+.leaflet-container .leaflet-marker-shadow {
+  background: none !important;
+  image-rendering: optimizeQuality;
+}
+
+.leaflet-container .leaflet-marker-icon {
+  background: url('https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png') no-repeat center center !important;
+  width: 25px !important;
+  height: 41px !important;
+}
+
+.leaflet-container .leaflet-marker-shadow {
+  background: url('https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png') no-repeat center center !important;
+  width: 41px !important;
+  height: 41px !important;
+}
+
+// angular calendar
+/* styles.scss */
+@import 'node_modules/angular-calendar/css/angular-calendar.css';
+
+

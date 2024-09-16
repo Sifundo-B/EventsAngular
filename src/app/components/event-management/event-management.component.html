@@ -1,0 +1,69 @@
+
+<div class="container mx-auto p-4 mb-16">
+  <h1 class="text-2xl text-white font-bold mb-4">Manage Events</h1>
+  
+  <!-- Search Bar -->
+  <div class="mb-2" style="width: 330px;">
+    <input type="text" [(ngModel)]="searchQuery" (input)="getSuggestions()" placeholder="Search by event or category" class="search-bar">
+    <ul *ngIf="suggestions.length > 0" class="suggestions-list">
+      <li *ngFor="let suggestion of suggestions" (click)="searchQuery = suggestion; searchEvents(); suggestions = []" class="suggestion-item">
+        {{ suggestion }}
+      </li>
+    </ul>
+    <!-- <button (click)="searchEvents()" class="btn-primary ml-2">Search</button> -->
+  </div>
+  
+  <!-- Filter by Status -->
+  <div class="mb-4" style="margin-left: 150px;margin-top: -39px;">
+    <select [(ngModel)]="filterStatus" (change)="applyFilter()" class="filter-select" style="width: 100px;margin-left: 100px;margin-top:-80px;height: 40px;">
+      <option value="ALL">Filter</option>
+      <option value="SUBMITTED">Show Submitted</option>
+      <option value="APPROVED">Show Approved</option>
+      <option value="REJECTED">Show Rejected</option>
+    </select>
+  </div>
+  
+  <!-- Events List -->
+  <div *ngIf="filteredEvents.length === 0" class="text-white text-center">
+    <p>No events available.</p>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
+    <div *ngFor="let event of filteredEvents" class="card-wrapper">
+      <div class="card-contents">
+        <ng-container *ngIf="isOrganizerOrAdmin()"> 
+          <img *ngIf="event.status === 'APPROVED'" src="assets/approve icon.png" alt="Approved" class="status-icon" title="Approved">
+          <img *ngIf="event.status === 'REJECTED'" src="assets/reject icon.png" alt="Rejected" class="status-icon" title="Rejected">
+          <img *ngIf="event.status === 'SUBMITTED'" src="assets/submit icon.png" alt="Submitted" class="status-icon" title="Submitted">
+        </ng-container>
+        <img *ngIf="event.imageUrl" [src]="event.imageUrl" alt="{{ event.name }}" class="card-image">
+        <div class="card-description">
+          <h2 class="text-xl font-semibold">{{ event.name }}</h2>
+          <p>{{ event.description }}</p>
+          <!-- <p>{{ event.date }}</p> -->
+          <a [routerLink]="['/event-details', event.id]" class="text-blue-500 underline">View Details</a>
+          <div class="flex justify-between mt-4" *ngIf="event.status === 'SUBMITTED'">
+            <ng-container *ngIf="isOrganizerOrAdmin(); else attendeeView">
+              <button class="btn-approve" (click)="approveEvent(event.id)">Approve</button>
+              <button class="btn-reject" (click)="showRejectionBox(event.id)">Reject</button>
+            </ng-container>
+            <ng-template #attendeeView>
+              <!-- <button class="btn-book" (click)="bookEvent(event.id)">Book Event</button> -->
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Rejection Comment Box -->
+  <div *ngIf="showRejectionCommentBox" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
+    <div class="rounded-lg shadow-md p-4 w-1/2 rejection-box">
+      <h2 class="text-xl font-semibold mb-2">Rejection Reason</h2>
+      <textarea [(ngModel)]="rejectionComment" placeholder="Enter reason for rejection" class="rejection-textarea"></textarea>
+      <div class="flex justify-end mt-4">
+        <button class="btn-reject" (click)="rejectEvent()">Submit Rejection</button>
+        <button class="btn-cancel ml-2" (click)="showRejectionCommentBox = false">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

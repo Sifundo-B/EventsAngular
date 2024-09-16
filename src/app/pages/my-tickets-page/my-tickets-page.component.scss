@@ -1,0 +1,57 @@
+// body {
+//     background: black;
+// }
+.container {
+    background: linear-gradient(rgb(8, 46, 183), rgb(26, 26, 26));
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    overflow-y: auto; /* Allow scrolling if content overflows */
+  }
+  
+  .ticket {
+    position: relative;
+    width: 160px; /* Adjust width to desired size */
+    height: 100px; /* Adjust height to desired size */
+    border: 2px solid white;
+    background:  rgb(88, 124, 177);
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+  }
+  
+  .ticket img {
+    max-width: 110%;
+    max-height: auto;
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
+   
+  }
+  
+  .ticket:before,
+  .ticket:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 1.2em;
+    width: 0.6em;
+    border: 2px solid white;
+  }
+  
+  .ticket:before {
+    left: -2px;
+    border-radius: 0 1em 1em 0;
+    border-left-color: rgb(88, 124, 177);
+  }
+  
+  .ticket:after {
+    right: -2px;
+    border-radius: 1em 0 0 1em;
+    border-right-color: rgb(88, 124, 177);
+  }
+  
+  

@@ -1,0 +1,83 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.container {
+  position: fixed;
+  text-align: center;
+  color: white;
+  height: 100vh;
+  background-image: url('/assets/landing page2..gif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 600px;
+}
+
+.bottom-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px white;
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 10px 20px;
+  color: rgb(218, 33, 221);
+  background-color: rgba(0, 0, 0, 0.5);
+  font-weight: bolder;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  transform: scale(1.05);
+}
+
+h2 {
+  color: rgb(191, 32, 183);
+  font-size: larger;
+  font-weight: bolder;
+  margin: 0;
+}
+
+h1 {
+  margin: 20px 0;
+}
+
+@media (max-width: 768px) {
+  .centered {
+      width: 90%;
+  }
+
+  h2 {
+      font-size: medium;
+  }
+
+  h1 {
+      font-size: large;
+  }
+
+  button {
+      width: 100%;
+      margin: 10px 0;
+  }
+}

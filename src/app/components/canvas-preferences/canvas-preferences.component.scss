@@ -1,0 +1,68 @@
+:host {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+}
+
+
+  .container{
+    margin: 0%
+  }
+
+  canvas {
+    display: block; /* Removes any default padding or margin */
+    top: 0;
+  left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+  }
+
+  .main__headings{
+    font-optical-sizing:inherit;
+    font-weight:900;
+    font-size: x-large;
+
+
+  }
+
+  .subheading{
+    font-optical-sizing:inherit;
+    font-weight:400;
+    font-size: 22px;
+  }
+
+  .heading{
+    font-optical-sizing:inherit;
+    font-weight:600;
+    font-size: large;
+  }
+  .text-2xl{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: to make the header stand out */
+    color: white;
+    padding: 16px; /* Adjust padding as needed */
+    text-align: center;
+    z-index: 1000; 
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      // padding: 4px;
+      height: auto; // Allow container to adjust height based on content
+    }
+  
+    h2 {
+      font-size: 2xl; // Adjust font size for smaller screens
+    }
+  
+    button {
+      // padding: 2px 4px; // Adjust button padding for smaller screens
+      font-size: lg; // Adjust font size for smaller screens
+    }
+  }
+  

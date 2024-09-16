@@ -1,0 +1,43 @@
+<div class="calendar-controls">
+    <button (click)="changeView('month')">Month View</button>
+    <button (click)="changeView('day')" >Day View</button>
+</div>
+
+<div class="calendar-container " >
+    <div class="month-nav">
+        <button (click)="previousMonth()">
+            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7"/>
+              </svg>
+        </button>
+        <h2>{{ getMonthName(viewDate) }}</h2>
+        <button (click)="nextMonth()">
+            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7"/>
+              </svg>                  
+        </button>
+    </div>
+    <div  *ngIf="view === 'month'">
+        <mwl-calendar-month-view
+      
+          [viewDate]  ="viewDate"
+          [events]="events"
+          (eventClicked)="handleEventClick($event.event)"
+          (dayClicked)="handleDateClick($event)"
+          [refresh]="refresh"
+          [activeDayIsOpen]="activeDayIsOpen"
+        ></mwl-calendar-month-view>
+    </div>
+
+    <div *ngIf="view === 'day'">
+        <h2>{{ getDayName(viewDate) }}</h2>
+        <mwl-calendar-day-view 
+          [viewDate]="viewDate"
+          [events]="events"
+          (eventClicked)="handleEventClick($event.event)"
+          (dayClicked)="handleDateClick($event)"
+          [refresh]="refresh"
+          [activeDayIsOpen]="activeDayIsOpen"
+        ></mwl-calendar-day-view>
+    </div>
+</div>

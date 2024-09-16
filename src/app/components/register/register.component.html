@@ -1,0 +1,106 @@
+<div class="min-h-screen flex items-center justify-center bg-gif py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8 bg-white bg-opacity-0 p-8 rounded-lg shadow-lg">
+    <div>
+      <img src="/assets/LogoSolid-removebg-preview.png" alt="Logo" class="w-48 h-48 object-contain mx-auto mb-8">
+      <!-- <h2 class="mt-6 text-center text-3xl font-extrabold text-blue-900">
+        Sign Up
+      </h2> -->
+    </div>
+    <form class="mt-8 space-y-6" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="rounded-md shadow-sm -space-y-px">
+        <div>
+          <label for="firstName" class="sr-only">First Name</label>
+          <input id="firstName" name="firstName" type="text" formControlName="firstName" required
+            class="appearance-none rounded-t-md relative block w-full px-3 py-2 border bg-transparent placeholder-text focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="First Name">
+          <div *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched" class="text-red-600">First name is required</div>
+        </div>
+        <div>
+          <label for="lastName" class="sr-only">Last Name</label>
+          <input id="lastName" name="lastName" type="text" formControlName="lastName" required
+            class="appearance-none relative block w-full px-3 py-2 border bg-transparent placeholder-text focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="Last Name">
+          <div *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched" class="text-red-600">Last name is required</div>
+        </div>
+        <div>
+          <label for="phoneNumber" class="sr-only">Phone Number</label>
+          <input id="phoneNumber" name="phoneNumber" type="text" formControlName="phoneNumber" required
+            class="appearance-none relative block w-full px-3 py-2 border bg-transparent placeholder-text focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="Phone Number">
+          <div *ngIf="registerForm.get('phoneNumber')?.invalid && registerForm.get('phoneNumber')?.touched" class="text-red-600">Phone number is required</div>
+        </div>
+        <div>
+          <label for="address" class="sr-only">Address</label>
+          <input id="address" name="address" type="text" formControlName="address" required
+            class="appearance-none relative block w-full px-3 py-2 border bg-transparent placeholder-text focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="Address">
+          <div *ngIf="registerForm.get('address')?.invalid && registerForm.get('address')?.touched" class="text-red-600">Address is required</div>
+        </div>
+        <div>
+          <label for="email" class="sr-only">Email</label>
+          <input id="email" name="email" type="email" formControlName="email" required
+            class="appearance-none relative block w-full px-3 py-2 border bg-transparent placeholder-text focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="Email">
+          <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="text-red-600">Email is required</div>
+        </div>
+        <div class="relative">
+          <label for="password" class="sr-only">Password</label>
+          <input id="password" [type]="showPassword ? 'text' : 'password'" name="password" formControlName="password" required
+            class="appearance-none relative block w-full px-3 py-2 border bg-transparent placeholder-text focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="Password">
+          <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+            <button type="button" (click)="togglePasswordVisibility()"
+              class="text-gray-400 hover:text-gray-500 focus:outline-none focus:text-gray-500">
+              <svg *ngIf="!showPassword" class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825a10.05 10.05 0 01-5.75 1.675 10.05 10.05 0 01-5.75-1.675m12-6.825A10.05 10.05 0 0114 10.825 10.05 10.05 0 0118 12.825M3.325 4.325l16.35 16.35" />
+              </svg>
+              <svg *ngIf="showPassword" class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.625a8.025 8.025 0 016 1.675m-6-1.675a8.025 8.025 0 00-6 1.675m12 6a8.025 8.025 0 010 5.75m0-5.75a8.025 8.025 0 00-6-1.675M4.625 12a8.025 8.025 0 000 5.75m0-5.75A8.025 8.025 0 016 10.325M18 12a8.025 8.025 0 00-6-1.675M4.625 12a8.025 8.025 0 015.75-1.675m0 0a8.025 8.025 0 016 1.675" />
+              </svg>
+            </button>
+          </div>
+          <div *ngIf="passwordStrength && registerForm.get('password')?.touched" class="text-red-600">
+            Password must be at least 8 characters long and include upper, lower case, special characters, and numbers.
+          </div>
+        </div>
+        <div class="relative">
+          <label for="confirmPassword" class="sr-only">Confirm Password</label>
+          <input id="confirmPassword" [type]="showConfirmPassword ? 'text' : 'password'" name="confirmPassword" formControlName="confirmPassword" required
+            class="appearance-none rounded-b-md relative block w-full px-3 py-2 border bg-transparent placeholder-text focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="Confirm Password">
+          <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+            <button type="button" (click)="toggleConfirmPasswordVisibility()"
+              class="text-gray-400 hover:text-gray-500 focus:outline-none focus:text-gray-500">
+              <svg *ngIf="!showConfirmPassword" class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825a10.05 10.05 0 01-5.75 1.675 10.05 10.05 0 01-5.75-1.675m12-6.825A10.05 10.05 0 0114 10.825 10.05 10.05 0 0118 12.825M3.325 4.325l16.35 16.35" />
+              </svg>
+              <svg *ngIf="showConfirmPassword" class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.625a8.025 8.025 0 016 1.675m-6-1.675a8.025 8.025 0 00-6 1.675m12 6a8.025 8.025 0 010 5.75m0-5.75a8.025 8.025 0 00-6-1.675M4.625 12a8.025 8.025 0 000 5.75m0-5.75A8.025 8.025 0 016 10.325M18 12a8.025 8.025 0 00-6-1.675M4.625 12a8.025 8.025 0 015.75-1.675m0 0a8.025 8.025 0 016 1.675" />
+              </svg>
+            </button>
+          </div>
+          <div *ngIf="passwordMismatch && registerForm.get('confirmPassword')?.touched" class="text-red-600">Passwords do not match</div>
+        </div>
+        <div>
+          <label for="role" class="sr-only">Role</label>
+          <select id="role" name="role" formControlName="role" required
+            class="appearance-none rounded-md relative block w-full px-3 py-2 border bg-transparent placeholder-text focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+            <option value="" disabled selected>Select Role</option>
+            <option value="Attendee">Attendee</option>
+            <option value="Organizer">Organizer</option>
+          </select>
+          <div *ngIf="registerForm.get('role')?.invalid && registerForm.get('role')?.touched" class="text-red-600">Role is required</div>
+        </div>
+      </div>
+      <div>
+        <button type="submit" [disabled]="registerForm.invalid"
+          class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          Sign Up
+        </button>
+      </div>
+      <div class="text-center text-sm text-gray-200">
+        Already have an account? <a [routerLink]="'/signin'" class="font-medium text-indigo-200 hover:text-indigo-500">Sign In</a>
+      </div>
+    </form>
+  </div>
+</div>

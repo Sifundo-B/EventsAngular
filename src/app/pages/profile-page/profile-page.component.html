@@ -1,0 +1,61 @@
+<div   class="container fixed w-full h-full custom-bg overflow-auto">
+  <div class="header text-gray-300 flex justify-center mt-8 text-4xl">
+    <h1>Profile</h1>
+  </div>
+  <div class="profileCard flex justify-center mt-7">
+    <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-300 dark:border-gray-700" *ngIf="user">
+      <div class="flex flex-col items-center">
+        <img [src]="user.image || 'https://d30y9cdsu7xlg0.cloudfront.net/png/138926-200.png'" alt="User Pic" class="rounded-full shadow-md cursor-pointer w-28 h-28 m-4">
+        <h5 class="mb-4 text-xl font-bold text-gray-900">{{ user.firstName }} {{ user.lastName }}</h5>
+        <span class="text-sm font-bold text-gray-500 mb-4">{{ user.email }}</span>
+      </div>
+    </div>
+    <div *ngIf="errorFetchingUser" class="text-red-500 text-medium dark:text-red-700">
+      Error fetching user profile. Please try again later.
+    </div>
+  </div>
+
+  <div class="main grid grid-cols-2 gap-4 p-14 justify-center mb-8">
+    <button class="btn flex flex-col items-center justify-center gap-2 w-full h-full aspect-square bg-indigo-400 border border-gray-200 rounded-lg text-lg text-black transition duration-300 ease-in-out hover:bg-indigo-300" [routerLink]="['/editProfile', iduser]">
+      <svg class="w-12 h-12 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <path stroke="black" stroke-width="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+      </svg>              
+      <span>Edit Profile</span>
+    </button>
+
+    <button class="btn flex flex-col items-center justify-center gap-2 w-full h-full aspect-square bg-indigo-400 border border-gray-200 rounded-lg text-lg text-black transition duration-300 ease-in-out hover:bg-indigo-300" routerLink="/preferences">
+      <svg class="w-12 h-12 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <path stroke="black" stroke-linecap="round" stroke-width="2" d="M20 6H10m0 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0m0 0H4m16 6h-2m0 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0m0 0H4m16 6H10m0 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0m0 0H4"/>
+      </svg>                  
+      <span>Preferences</span>
+    </button>
+
+    <button class="btn flex flex-col items-center justify-center gap-2 w-full h-full aspect-square bg-indigo-400 border border-gray-200 rounded-lg text-lg text-black transition duration-300 ease-in-out hover:bg-indigo-300" routerLink="/history">
+      <svg class="w-12 h-12 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.5 12A2.5 2.5 0 0 1 21 9.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v2.5a2.5 2.5 0 0 1 0 5V17a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-2.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
+      </svg>             
+      <span>My Tickets</span>
+    </button>
+<!-- 
+    <button class="btn flex flex-col items-center justify-center gap-2 w-full h-full aspect-square bg-indigo-400 border border-gray-200 rounded-lg text-lg text-black transition duration-300 ease-in-out hover:bg-indigo-300">
+      <svg class="w-12 h-12 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <path stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14v3m-3-6V7a3 3 0 1 1 6 0v4m-8 0h10a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1Z"/>
+      </svg>              
+      <span>Security</span>
+    </button> -->
+
+    <button class="btn flex flex-col items-center justify-center gap-2 w-full h-full aspect-square bg-indigo-400 border border-gray-200 rounded-lg text-lg text-black transition duration-300 ease-in-out hover:bg-indigo-300" routerLink="/subscriptions">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="black">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+      </svg>
+      <span>Subscriptions</span>
+    </button>
+
+    <button class="btn flex flex-col items-center justify-center gap-2 w-full h-full aspect-square bg-indigo-400 border border-gray-200 rounded-lg text-lg text-black transition duration-300 ease-in-out hover:bg-indigo-300" (click)="logout()">
+      <svg class="w-12 h-12 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <path stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H8m12 0-4 4m4-4-4-4M9 4H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h2"/>
+      </svg>              
+      <span>Logout</span>
+    </button>
+  </div>
+</div>

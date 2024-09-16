@@ -1,0 +1,35 @@
+<div class="container mx-auto p-4" style="  height: 600px;  background: linear-gradient(rgb(8, 46, 183), rgb(26, 26, 26));">
+    <h2 class="text-2xl font-bold mb-4" style="color: white;margin-left: 100px;font-size: 30px;font-weight: normal;">Subscribe To Plan</h2>
+  
+    <div class="bg-white shadow-md rounded-lg p-6 mb-4" style="background-color: rgb(5, 15, 82);height: 100px;margin-top: 50px;">
+      <h3 class="text-xl font-semibold mb-2" style="color:white;">Individual plan</h3>
+    </div>
+    <div class="mt-4">
+  
+    
+      <div  style="width: 170px;margin-left: 100px;margin-top: 50px;" class="mt-4">
+      <button 
+      style="margin-top: 50px;width: 200px;"
+      routerLink="/user-subscription"
+        (click)="addUserToIndividualPlan()" 
+        class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+       Subscribe
+      </button>
+    </div>
+<div style="width: 150px;margin-top: -30px;">
+
+    <button 
+    routerLink="/subscriptions"
+   style="margin-top:60px;width: 100px;margin-left: 100px;width: 200px;background-color: rgb(7, 7, 91);"
+    class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    Back
+    </button>
+</div>
+    <div *ngIf="successMessage" class="bg-green-100 text-green-700 p-4 rounded mb-4">
+      <p>{{ successMessage }}</p>
+    </div>
+  
+    <div *ngIf="errorMessage" class="bg-red-100 text-red-700 p-4 rounded">
+      <p>{{ errorMessage }}</p>
+    </div>
+  </div>

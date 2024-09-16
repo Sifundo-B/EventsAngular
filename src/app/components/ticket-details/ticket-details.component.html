@@ -1,0 +1,8 @@
+<div *ngIf="ticket" class="ticket-details">
+  <h2>Ticket for {{ ticket.eventName }}</h2>
+  <p><strong>Date:</strong> {{ ticket.eventDate | date: 'fullDate' }}</p>
+  <p><strong>Location:</strong> {{ ticket.location }}</p>
+  <p><strong>Ticket Type:</strong> {{ ticket.ticketType }}</p>
+  <p><strong>Price:</strong> ${{ ticket.price }}</p>
+  <p><strong>Purchased On:</strong> {{ ticket.purchaseDate | date: 'fullDate' }}</p>
+</div>

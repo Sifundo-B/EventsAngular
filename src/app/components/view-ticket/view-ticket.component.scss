@@ -1,0 +1,7 @@
+.container {
+    background: linear-gradient(rgb(8, 46, 183), rgb(26, 26, 26));
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    overflow-y: auto; /* Allow scrolling if content overflows */
+  }

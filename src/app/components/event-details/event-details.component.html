@@ -1,0 +1,135 @@
+<div class="container mx-auto p-4 pb-16" [ngStyle]="{'background': backgroundColorStyle}">
+  <h1 class="text-2xl text-white font-bold mb-4">Event Details</h1>
+
+  <!-- Custom Loader -->
+  <div *ngIf="loading" class="spinner">
+    <div class="react1"></div>
+    <div class="react2"></div>
+    <div class="react3"></div>
+    <div class="react4"></div>
+    <div class="react5"></div>
+  </div>
+
+  <div *ngIf="event" class="rounded-lg shadow-md p-4 bg-white bg-opacity-25">
+    <!-- Sold Out Banner -->
+    <div *ngIf="event.numberOfTickets === 0" class="sold-out-banner">
+      <p class="text-red-500 font-bold text-center">SOLD OUT</p>
+    </div>
+
+    <!-- Event Image -->
+    <div class="h-48 w-full bg-cover bg-center rounded-lg overflow-hidden mb-4" 
+         [ngStyle]="{'background-image': 'url(' + event.imageUrl + ')'}">
+    </div>
+
+    <!-- Event Main Details -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <div class="p-4 bg-gray-800 bg-opacity-75 rounded-lg text-white">
+        <h2 class="text-2xl font-bold mb-2 text-center">{{ event.name }}</h2>
+        <p class="mb-4 text-center">{{ event.description }}</p>
+      </div>
+     
+      <!-- Location Card -->
+      <div class="p-4 bg-gray-800 bg-opacity-75 rounded-lg text-white">
+        <div class="flex items-center">
+          <span class="material-icons text-white mr-2">location_on</span>
+          <p>{{ event.address }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Date, Category, Price, and Tickets Cards -->
+    <div class="flex flex-wrap justify-center gap-10 mb-4">
+      <!-- Date Card -->
+      <div class="p-4 bg-gray-800 bg-opacity-75 rounded-lg text-white flex items-center justify-center text-center"
+           style="width: 120px; height: 120px; aspect-ratio: 1; overflow: hidden;">
+        <div>
+          <span class="material-icons text-white">event</span>
+          <p class="text-xs">{{ event.date | date: 'fullDate' }}</p>
+        </div>
+      </div>
+      
+      <!-- Category Card -->
+      <div class="p-4 bg-gray-800 bg-opacity-75 rounded-lg text-white flex items-center justify-center text-center"
+           style="width: 120px; height: 120px; aspect-ratio: 1; overflow: hidden;">
+        <div>
+          <strong class="text-xs">Category:</strong>
+          <p class="text-xs">{{ event.eventCategory.name }}</p>
+        </div>
+      </div>
+      
+      <!-- Price Card -->
+      <div class="p-4 bg-gray-800 bg-opacity-75 rounded-lg text-white flex items-center justify-center text-center"
+           style="width: 120px; height: 120px; aspect-ratio: 1; overflow: hidden;">
+        <div>
+          <strong class="text-xs">Price:</strong>
+          <p class="text-xs">{{ event.price }}</p>
+        </div>
+      </div>
+      
+      <!-- Tickets Card -->
+      <div class="p-4 bg-gray-800 bg-opacity-75 rounded-lg text-white flex items-center justify-center text-center"
+           style="width: 120px; height: 120px; aspect-ratio: 1; overflow: hidden;">
+        <div>
+          <strong class="text-xs">Tickets:</strong>
+          <p class="text-xs">{{ event.numberOfTickets }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map -->
+    <div id="map" style="height: 300px;" class="my-4"></div>
+
+    <!-- Action Buttons -->
+    <div class="flex justify-between mt-4" *ngIf="event.status === 'SUBMITTED' && isAdmin()">
+      <button 
+        class="bg-red-500 text-white rounded-full h-10 w-10 flex items-center justify-center"
+        (click)="rejectEvent()"
+        [disabled]="event.status !== 'SUBMITTED'">
+        <span class="material-icons">close</span>
+      </button>
+      <button 
+        class="bg-green-500 text-white rounded-full h-10 w-10 flex items-center justify-center"
+        (click)="approveEvent()"
+        [disabled]="event.status !== 'SUBMITTED'">
+        <span class="material-icons">check</span>
+      </button>
+    </div>
+
+
+    <div class="flex justify-between mt-4" *ngIf="event.status === 'APPROVED' && isAttendee() && event.numberOfTickets > 0">
+      <button 
+        class="bg-blue-500 text-white px-4 py-2 rounded mr-2" 
+        (click)="purchaseTicket()"
+        [disabled]="loading"> <!-- Disable button while loading -->
+        Purchase Ticket
+      </button>
+    
+      <button 
+       class="bg-blue-500 text-white px-4 py-2 rounded" 
+        (click)="navigateBasedOnRole()">
+        Back to Events
+      </button>
+
+    </div>
+
+    <!-- Rejection Comment Box -->
+    <div *ngIf="showRejectionCommentBox" class="mt-4">
+      <textarea [(ngModel)]="rejectionComment" placeholder="Enter reason for rejection" class="w-full p-2 border border-gray-300 rounded"></textarea>
+      <button 
+        class="mt-2 bg-red-500 text-white px-4 py-2 rounded" 
+        (click)="rejectEvent()">
+        Submit Rejection
+      </button>
+    </div>
+  </div>
+
+  <!-- Event Not Found Handling -->
+  <div *ngIf="!event" class="text-center">
+    <p class="text-red-500">Event not found.</p>
+    <button 
+      class="mt-4 bg-blue-500 text-white px-4 py-2 rounded" 
+      (click)="router.navigate(['/home'])">
+      Back to Events
+    </button>
+  </div>
+</div>

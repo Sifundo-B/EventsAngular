@@ -1,0 +1,43 @@
+<div style="border: solid 0px;height: 700px;"  class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700" *ngIf="subscriptionPlan">
+  <h1 style="font-size: 30px;">{{ subscriptionPlan.planName }}</h1>
+
+  <div>
+    <div class="mt-6">
+      <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" style="color: white; margin-top: 60px;">
+        Benefits
+      </h6>
+      <ul class="list-disc list-inside mt-2">
+        <li *ngFor="let feature of subscriptionPlan.features" class="text-gray-600 dark:text-gray-300" style="color: white;">
+          {{ feature.name }}
+        </li>
+      </ul>
+    </div>
+<p>Subscription Expiry date :{{subscriptionPlan.subscriptionExpiryDate}}</p>
+    <div>
+      <p class="text-gray-600 dark:text-gray-300" style="color: white; font-weight: bold;">
+        <!-- You can add additional details here if needed -->
+      </p>
+      <h1 class="text-gray-600 dark:text-gray-300" style="color: white;font-size: 30px;">
+       R {{ subscriptionPlan.price }} <span style="font-size: 30px;font-weight: bold;">{{subscriptionPlan.duration}}</span>
+      </h1> 
+     
+    </div>
+    <button 
+    routerLink="/update-subscription"
+   style="background-color: rgb(16, 16, 134);margin-top: 200px;"
+    class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+  Update Plan
+  </button>
+
+  <button 
+  routerLink="/profile"
+   (click)=" unsubscribe()"
+   style="margin-left: 120px;margin-top: 20px;background-color: rgb(16, 16, 134);"
+  class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+  Unsubscribe
+</button>
+</div>
+    
+  </div>
+
+

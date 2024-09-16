@@ -1,0 +1,91 @@
+// * {
+//     margin: 0;
+//     padding: 0;
+//     box-sizing: border-box;
+//     outline: none;
+//     text-align: none;
+//     list-style: none;
+// }
+
+// .container {
+//     position: fixed;
+//     background: linear-gradient(rgb(8, 46, 183), rgb(26, 26, 26));
+    
+//     width: 100vw;
+//     height: 100vh;
+//     overflow: hidden;
+
+//     .header{
+//         color: rgb(207, 207, 207);
+//         display:flex;
+//         justify-content: center;
+//         margin-top: 5%;
+//         font-size: xx-large;
+//     }
+
+//     .profileCard{
+//         display: flex;
+//         justify-content: center;
+//         margin-top: 10%;
+
+        
+//         img{
+//             border-radius: 50%;
+//             box-shadow: 0px 0px 5px 0px #c1c1c1;
+//             margin: 15px;
+//             cursor: pointer;
+//             width: 70px;
+//             height: 70px;
+            
+//         }   
+
+//     }
+
+//     .main {
+//         display: grid;
+//         grid-template-columns: repeat(2, 1fr);
+//         gap: 20px;
+//         justify-items: center;
+//         padding: 20px;
+      
+//   .btn {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     gap: 10px;
+//     padding: 10px 20px;
+//     width: 200px;
+//     height: 70px;
+//     background-color: #9497df;
+//     border: 1px solid #e0e0e0;
+//     border-radius: 6px;
+//     font-size: 16px;
+//     text-align: center;
+//     color: black;
+//     transition: background-color 0.3s ease;
+//   }
+
+//   .btn:hover {
+//     background-color: #f0f0f0;
+//   }
+
+//   .btn svg {
+//     width: 24px;
+//     height: 24px;
+//   }
+        
+//         //   .btn svg {
+//         //     width: 24px;
+//         //     height: 24px;
+//         //     //fill: currentColor;
+//         //   }
+
+
+//       }
+// }
+
+.custom-bg {
+    background: linear-gradient(rgb(8, 46, 183), rgb(26, 26, 26));
+  }
+
+ 

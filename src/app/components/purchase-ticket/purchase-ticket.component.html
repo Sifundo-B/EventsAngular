@@ -1,0 +1,41 @@
+<div class="container mx-auto p-4">
+  <h1 class="text-2xl font-bold mb-4">Purchase Ticket</h1>
+  <div *ngIf="event">
+    <p><strong>Event Name:</strong> {{ event.name }}</p>
+    <form>
+      <div>
+        <label for="firstName">First Name:</label>
+        <input id="firstName" [(ngModel)]="firstName" name="firstName" type="text" required />
+      </div>
+      <div>
+        <label for="lastName">Last Name:</label>
+        <input id="lastName" [(ngModel)]="lastName" name="lastName" type="text" required />
+      </div>
+      <div>
+        <label for="email">Email:</label>
+        <input id="email" [(ngModel)]="email" name="email" type="email" required />
+      </div>
+      <div>
+        <label for="phoneNumber">Phone Number:</label>
+        <input id="phoneNumber" [(ngModel)]="phoneNumber" name="phoneNumber" type="text" />
+      </div>
+      <div>
+        <label for="ticketType">Ticket Type:</label>
+        <select id="ticketType" [(ngModel)]="ticketType" name="ticketType">
+          <option value="Regular">Regular</option>
+          <option value="VIP">VIP</option>
+        </select>
+      </div>
+      <div>
+        <label for="price">Price:</label>
+        <input id="price" [(ngModel)]="price" name="price" type="number" [value]="150" readonly />
+      </div>
+      <button type="button" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded" (click)="confirmBooking()">
+        Proceed to Payment
+      </button>
+    </form>
+  </div>
+  <div *ngIf="!event" class="text-center">
+    <p class="text-red-500">Event not found.</p>
+  </div>
+</div>

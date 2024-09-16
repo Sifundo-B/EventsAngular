@@ -1,0 +1,53 @@
+<div  class="container mx-auto py-10 overflow-auto" *ngIf="user">
+  <div class="flex justify-center" >
+    <div class="bg-white p-5 rounded-lg shadow-lg w-full max-w-sm"  style="background-color: rgb(11, 2, 54);">
+      <div class="relative flex justify-center mb-6">
+        <div class="profile-pic">
+          <img  style="filter: invert(1) brightness(200%) contrast(90%);" alt="User Pic" [src]="user.image || 'https://d30y9cdsu7xlg0.cloudfront.net/png/138926-200.png'" id="profile-image1" (click)="onProfileImageClick()">
+          <input id="profile-image-upload" type="file" (change)="onFileSelected($event)" class="hidden">
+        </div>
+      </div>
+      <form [formGroup]="userForm" (ngSubmit)="updateProfile()"> 
+        <div class="text-center">
+          <div class="mb-4">
+            <label for="firstName" class="block text-gray-700">First Name</label>
+            <input type="text" formControlName="firstName" class="form-control border border-gray-300 rounded-md w-full px-3 py-2" id="firstName" placeholder="Enter First Name"style="color: rgb(140, 140, 179);">
+            <div *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched" class="text-red-500">First name is required.</div>
+          </div>
+          <div class="mb-4">
+            <label for="lastName" class="block text-gray-700">Last Name</label>
+            <input type="text" formControlName="lastName" class="form-control border border-gray-300 rounded-md w-full px-3 py-2" id="lastName" placeholder="Enter Last Name" style="color: rgb(140, 140, 179);">
+            <div *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched" class="text-red-500">Last name is required.</div>
+          </div>
+          <div class="mb-4">
+            <label for="mobile" class="block text-gray-700">Mobile Number</label>
+            <input type="text" formControlName="mobile" class="form-control border border-gray-300 rounded-md w-full px-3 py-2" id="mobile" placeholder="Enter Mobile Number"style="color: rgb(140, 140, 179);">
+            <div *ngIf="userForm.get('mobile')?.invalid && userForm.get('mobile')?.touched" class="text-red-500">
+              <div *ngIf="userForm.get('mobile')?.errors?.['required']">Mobile number is required.</div>
+              <div *ngIf="userForm.get('mobile')?.errors?.['pattern']">Invalid mobile number.</div>
+            </div>
+          </div>
+          <div class="mb-4">
+            <label for="email" class="block text-gray-700">Email Address</label>
+            <input type="text" formControlName="email" class="form-control border border-gray-300 rounded-md w-full px-3 py-2" id="email" placeholder="Enter E-mail"style="color: rgb(140, 140, 179);">
+            <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched" class="text-red-500">
+              <div *ngIf="userForm.get('email')?.errors?.['required']">Email is required.</div>
+              <div *ngIf="userForm.get('email')?.errors?.['email']">Invalid email format.</div>
+            </div>
+          </div>
+          <div class="mb-4">
+            <label for="address" class="block text-gray-700">Address</label>
+            <input type="text" formControlName="address" class="form-control border border-gray-300 rounded-md w-full px-3 py-2" id="address" placeholder="Enter Address"style="color: rgb(140, 140, 179);">
+            <div *ngIf="userForm.get('address')?.invalid && userForm.get('address')?.touched" class="text-red-500">Address is required.</div>
+          </div>
+          <div class="update" style="width: 200px;margin-left: 170px;margin-top: 10px;">
+          <button type="submit" [disabled]="userForm.invalid" class="btn btn-info bg-blue-500 text-white px-4 py-2 rounded-md" >Update Profile</button></div>
+          &nbsp;
+
+          <div class="back" style="width: 150px;margin-top: -63px;">
+          <button style="width: 150px;" type="submit" routerLink="/profile" class="btn btn-info bg-red-500 text-white px-4 py-2 rounded-md" >Back</button></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

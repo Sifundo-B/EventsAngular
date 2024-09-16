@@ -1,0 +1,90 @@
+<div class="notifications-container">
+  <div class="header text-gray-300 flex justify-between items-center mt-4 mb-12 text-4xl font-medium">
+    <button class="flex items-center" routerLink="/home">
+      <svg class="w-10 h-10 text-gray-300 dark:text-white ml-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
+      </svg>
+    </button>
+    <h1 class="flex-grow text-center text-white">Notifications</h1>
+    <div class="w-12 h-12"></div>
+  </div>
+  
+  <div class="filter-buttons flex justify-between gap-4 mt-4 mb-8 px-4"> 
+    <button (click)="filterNotifications('all')" [class.active]="currentFilter === 'all'"
+        class="flex-1 px-4 py-2 rounded-lg text-gray-900 hover:bg-blue-600 hover:text-white transition duration-300"
+        [ngStyle]="{'background-color': currentFilter === 'all' ? 'rgb(89, 89, 121)' : 'rgb(240, 240, 240)'}">
+      All
+    </button>
+    <button (click)="filterNotifications('read')" [class.active]="currentFilter === 'read'"
+        class="flex-1 px-4 py-2 rounded-lg text-gray-900 hover:bg-blue-600 hover:text-white transition duration-300"
+        [ngStyle]="{'background-color': currentFilter === 'read' ? 'rgb(89, 89, 121)' : 'rgb(240, 240, 240)'}">
+      Read
+    </button>
+    <button (click)="filterNotifications('unread')" [class.active]="currentFilter === 'unread'"
+        class="flex-1 px-4 py-2 rounded-lg text-gray-900 hover:bg-blue-600 hover:text-white transition duration-300"
+        [ngStyle]="{'background-color': currentFilter === 'unread' ? 'rgb(89, 89, 121)' : 'rgb(240, 240, 240)'}">
+      Unread
+    </button>
+  </div>
+
+  <ul class="notifications-list mt-4" *ngIf="filteredNotifications.length > 0; else noNotifications">
+    <li *ngFor="let notification of filteredNotifications" 
+        [class.bg-gray-100]="!notification.isRead" class="flex justify-between items-center px-4 py-2 rounded-lg mb-2" style="background-color: rgb(12, 12, 81); color: white;height: 60px;">
+        <div>
+            <span class="text-white text-sm">{{ notification.message }}</span>
+            <p class="text-white text-sm">{{ notification.date | date:'mediumDate' }} {{ notification.date | date:'shortTime' }}</p>
+        </div>
+        <div class="flex space-x-2">
+            <!-- Read Icon -->
+            <button
+              class="text-blue-500 hover:text-blue-700 transition duration-300 relative"
+              *ngIf="notification.isRead"
+              (click)="readNotification(notification.id)"
+              aria-label="Read"
+            >
+              <i class="fas fa-envelope-open w-6 h-6"></i>
+              <span class="tooltip absolute left-1/2 transform -translate-x-1/2 -bottom-8 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100">Read</span>
+            </button>
+            
+            <!-- Mark as Read Icon -->
+            <button
+              class="text-blue-500 hover:text-blue-700 transition duration-300 relative"
+              *ngIf="!notification.isRead"
+              (click)="markAsRead(notification)"
+              aria-label="Mark as Read"
+            >
+              <i class="fas fa-envelope w-6 h-6"></i>
+              <span class="tooltip absolute left-1/2 transform -translate-x-1/2 -bottom-8 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100">Mark as Read</span>
+            </button>
+            
+            <!-- Delete Icon -->
+            <button
+              class="text-red-500 hover:text-red-700 transition duration-300 relative"
+              (click)="deleteNotification(notification.id)"
+              aria-label="Delete"
+            >
+              <i class="fas fa-trash w-6 h-6"></i>
+              <span class="tooltip absolute left-1/2 transform -translate-x-1/2 -bottom-8 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100">Delete</span>
+            </button>
+        </div>
+    </li>
+  </ul>
+
+  <!-- No Notifications Template -->
+  <ng-template #noNotifications>
+    <div *ngIf="currentFilter === 'unread'; else noNewNotifications" class="flex flex-col items-center justify-center h-full mt-36">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none"  stroke-width="6" stroke="currentColor" class="w-16 h-16 text-gray-400 mb-4" viewBox="0 0 640 512">
+        <path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7l-90.2-70.7c.2-.4 .4-.9 .6-1.3c5.2-11.5 3.1-25-5.3-34.4l-7.4-8.3C497.3 319.2 480 273.9 480 226.8l0-18.8c0-77.4-55-142-128-156.8L352 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 19.2c-42.6 8.6-79 34.2-102 69.3L38.8 5.1zM406.2 416L160 222.1l0 4.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S115.4 416 128 416l278.2 0zm-40.9 77.3c12-12 18.7-28.3 18.7-45.3l-64 0-64 0c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"/>
+      </svg>
+      <p class="text-white text-xl font-medium">You have no unread Notifications</p>
+    </div>
+    <ng-template #noNewNotifications>
+      <div class="flex flex-col items-center justify-center h-full mt-36">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none"  stroke-width="6" stroke="currentColor" class="w-16 h-16 text-gray-400 mb-4" viewBox="0 0 640 512">
+          <path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7l-90.2-70.7c.2-.4 .4-.9 .6-1.3c5.2-11.5 3.1-25-5.3-34.4l-7.4-8.3C497.3 319.2 480 273.9 480 226.8l0-18.8c0-77.4-55-142-128-156.8L352 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 19.2c-42.6 8.6-79 34.2-102 69.3L38.8 5.1zM406.2 416L160 222.1l0 4.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S115.4 416 128 416l278.2 0zm-40.9 77.3c12-12 18.7-28.3 18.7-45.3l-64 0-64 0c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"/>
+        </svg>
+        <p class="text-white text-xl font-medium">You have no new Notifications.</p>
+      </div>
+    </ng-template>
+  </ng-template>
+</div>

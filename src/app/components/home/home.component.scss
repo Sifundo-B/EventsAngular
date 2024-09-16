@@ -1,0 +1,79 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  
+}
+
+.events-list {
+  max-height: 40%;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.map-container {
+  flex: 1;
+  height: 60%;
+  z-index: 1000;
+}
+.carousel-container {
+  overflow: hidden;
+}
+
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+
+  .carousel-item {
+    flex: 0 0 auto;
+    width: 250px;
+    scroll-snap-align: center;
+    margin-right: 16px;
+  }
+}
+
+.carousel::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for a cleaner look */
+}
+
+.carousel > div {
+  scroll-snap-align: start;
+}
+
+img {
+  width: 100%;
+  height: 150px; /* Set a consistent height for the images */
+  object-fit: cover;
+}
+
+.custom-bg {
+  background: linear-gradient(rgb(8, 46, 183), rgb(26, 26, 26));
+  height: 100%;
+  
+}
+
+/* Tailwind CSS */
+.category-button {
+  @apply text-center p-2 rounded-full;
+  @apply bg-blue-400 text-white;
+}
+
+.category-item.active .category-button {
+  background-color: rgb(26, 3, 77); /* Active color */
+}
+
+/* Additional styling to ensure consistent size */
+.category-button {
+  width: 100px; /* Increase width to make it oval */
+  height: 50px;  /* Decrease height to make it oval */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px; /* Adjust font size if needed */
+}
+
+
+
+

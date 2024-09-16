@@ -1,0 +1,104 @@
+<div   class="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-800 to-gray-900">
+  <div  *ngIf="loading" class="absolute flex items-center justify-center w-full h-full bg-opacity-75 bg-gray-800 z-50">
+    <div class="spinner">
+      <div class="react1"></div>
+      <div class="react2"></div>
+      <div class="react3"></div>
+      <div class="react4"></div>
+      <div class="react5"></div>
+    </div>
+  </div>
+  <div  style="background: linear-gradient(rgb(8, 46, 183), rgb(26, 26, 26));;height: 950px;" class="w-full max-w-3xl p-8 bg-white rounded-lg shadow-md">
+    <div class="wizard">
+
+      
+      <div class="progress-bar flex justify-between mb-4">
+        <div class="step w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center text-white" [class.bg-green-500]="step >= 1">1</div>
+        <div class="step w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center text-white" [class.bg-green-500]="step >= 2">2</div>
+        <div class="step w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center text-white" [class.bg-green-500]="step >= 3">3</div>
+        <div class="step w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center text-white" [class.bg-green-500]="step >= 4">4</div>
+      </div>
+      <div class="text" style="height: 200px;color:lightblue; ">
+    <div class="style" style="margin-left: 55px;font-size: 30px;margin-top: 100px;">       
+     
+      <h3  >Cheer up  
+       <br> And Start Creating
+        <br>Your Best Event  Ever !!</h3>
+      </div>
+      </div>
+
+      <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" class="space-y-6">
+        <div [ngSwitch]="step">
+
+          <!-- Step 1 -->
+          <div  *ngSwitchCase="1" class="flex flex-col space-y-6">
+            <div>
+              <label  for="name" class="block mb-2 text-gray-700 font-medium">Event Name</label>
+              <input id="name" formControlName="name" type="text" style="color: rgb(8, 8, 8);" placeholder="Enter the Event Name"  class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            </div>
+            <div >
+              <label for="description" class="block mb-2 text-gray-700 font-medium">Description</label>
+              <textarea id="description" formControlName="description" style="color: rgb(8, 8, 8);" placeholder="Enter the description"  class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+            </div>
+            <button type="button" (click)="nextStep()" class="py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" [disabled]="!isStepValid()">Next</button>
+          </div>
+
+          <!-- Step 2 -->
+          <div *ngSwitchCase="2" class="flex flex-col space-y-6">
+            <div>
+              <label style="color: rgb(255, 255, 255);" for="date" class="block mb-2 text-gray-700 font-medium">Date</label>
+              <input id="date"  style="color:rgb(8, 8, 8);"  formControlName="date" type="date" [min]="today" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-white-500" />
+              <div style="background-color: antiquewhite;" *ngIf="eventForm.get('date')?.invalid && (eventForm.get('date')?.dirty || eventForm.get('date')?.touched)" class="text-red-600 mt-1">
+                <small *ngIf="eventForm.get('date')?.errors?.['required']">Date is required.</small>
+                <small *ngIf="eventForm.get('date')?.errors?.['futureDate']">Date cannot be in the past.</small>
+              </div>
+            </div>
+            <div>
+              <label  style="color: rgb(255, 254, 254);" for="eventCategory" class="block mb-2 text-gray-700 font-medium">Category</label>
+              <select style="background-color: rgb(251, 251, 251);color: rgb(0, 0, 0);"  id="eventCategory" formControlName="eventCategory"  class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option  style="color: rgb(0, 0, 0);" *ngFor="let category of categories"  [value]="category.id">{{category.name}}</option>
+              </select>
+            </div>
+            <button type="button" (click)="previousStep()" x class="py-2 px-4 bg-gray-400 text-white rounded-md hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400">Previous</button>
+            <button type="button" (click)="nextStep()"    class="py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" [disabled]="!isStepValid()">Next</button>
+          </div>
+
+          <!-- Step 3 -->
+          <div *ngSwitchCase="3" class="flex flex-col space-y-6">
+            <div>
+              <label for="image" class="block mb-2 text-gray-700 font-medium">Upload Image</label>
+              <input id="image" type="file" (change)="onImageSelected($event)" class="w-full p-2 border border-gray-300 rounded-md" />
+            </div>
+            <button type="button" (click)="previousStep()"  class="py-2 px-4 bg-gray-400 text-white rounded-md hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400">Previous</button>
+            <button type="button" (click)="nextStep()" class="py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Next</button>
+          </div>
+
+          <!-- Step 4 -->
+          <div *ngSwitchCase="4" class="flex flex-col space-y-6">
+            <div>
+              <label for="address"  class="block mb-2 text-gray-700 font-medium">Address</label>
+              <input id="address" style="background-color: azure;" formControlName="address" type="text" placeholder="Enter The Event Address" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+              <ul *ngIf="addressSuggestions.length > 0" class="bg-white rounded-md shadow-md mt-2">
+                <li *ngFor="let suggestion of addressSuggestions" (click)="selectAddress(suggestion)" class="px-4 py-2 cursor-pointer hover:bg-gray-200">
+                  {{ suggestion.name }}
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <label for="price" style="color: rgb(246, 246, 246);" class="block mb-2 text-gray-700 font-medium">Price</label>
+              <input   id="price" style="color: rgb(0, 0, 0);background-color: azure;" formControlName="price" type="number" step="0.01" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            </div>
+            <div>
+              <label for="numberOfTickets" class="block mb-2 text-gray-700 font-medium">Number of Tickets</label>
+              <input id="numberOfTickets" style="background-color: azure;color: rgb(13, 13, 13)"  formControlName="numberOfTickets" type="number" placeholder="Enter number of tickets" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            </div>
+            <button type="button" (click)="previousStep()" class="py-2 px-4 bg-gray-400 text-white rounded-md hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400">Previous</button>
+            <button type="submit" [disabled]="!eventForm.valid || !selectedLatitude || !selectedLongitude" class="py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Submit</button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

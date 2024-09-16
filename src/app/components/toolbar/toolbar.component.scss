@@ -1,0 +1,75 @@
+nav {
+    width: 100vw;
+    height: 6rem;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    z-index: 9999;
+  
+    a {
+      text-decoration: none;
+    }
+  
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      background-color: rgb(8, 46, 183);
+      height: 100%;
+      border-radius: 3rem;
+      padding: 0.5rem;
+      bottom: 0;
+  
+      .tab {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: rgb(218, 218, 218);
+        height: 100%;
+        padding: 0.4rem;
+        transition: 0.5s ease-in-out;
+  
+        i {
+          font-size: 1.3rem;
+        }
+  
+        p {
+          font-size: 0.6rem;
+        }
+  
+        &:hover {
+          color: white;
+          cursor: pointer;
+          background: #000000;
+          border-radius: 3rem;
+          transform: scale(1.01);
+        }
+  
+        position: relative; /* Ensure that badge positioning works relative to this element */
+      }
+    }
+  
+    .badge {
+      position: absolute;
+      top: -5px; /* Adjust for positioning on the icon */
+      right: -16px; /* Adjust for positioning on the icon */
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 20px;
+      height: 20px;
+      padding: 0.25rem;
+      font-size: 0.75rem;
+      font-weight: bold;
+      line-height: 1;
+      color: white;
+      background-color: red; /* Adjust background color */
+      border-radius: 50%; /* Ensures it's circular */
+      z-index: 10; /* Ensure it is above other elements */
+    }
+
+    
+  }
+  

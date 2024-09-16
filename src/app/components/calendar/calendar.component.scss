@@ -1,0 +1,180 @@
+/* Apply gradient background to the calendar container */
+.calendar-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: linear-gradient(rgb(8, 46, 183), rgb(26, 26, 26));
+  padding: 20px; /* Adjust padding as needed */
+  border-radius: 10px; /* Optional: adds rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: adds shadow for better visibility */
+  position: relative; /* Ensures that any absolute positioning inside will be relative to this container */
+  margin-bottom: 85px;
+}
+
+h2 {
+  color: white;
+  font-size: 24px;
+}
+
+/* Ensure calendar controls are styled properly */
+.calendar-controls {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.calendar-controls button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: none;
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.calendar-controls button:hover {
+  background-color: #ddd;
+}
+
+/* Style for calendar events */
+::ng-deep .cal-event-title {
+  display: flex;
+  align-items: center;
+}
+
+::ng-deep .cal-event-title img {
+  margin-right: 10px;
+  height: 20px;
+}
+
+/* Ensure calendar grid does not have a white background */
+::ng-deep .cal-month-view, ::ng-deep .cal-day-view {
+  background: transparent; /* Override any background styles applied by angular-calendar */
+}
+
+/* Styling for the day names */
+::ng-deep .cal-header .cal-cell {
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Styling for the month navigation */
+.month-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.month-nav h2 {
+  flex: 1;
+  text-align: center;
+  font-size: 1.5rem; /* Adjust font size as needed */
+  margin: 0;
+}
+
+.month-nav button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.month-nav svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Custom styles for SweetAlert2 buttons */
+.swal2-confirm {
+  background-color: #007bff; /* Blue for "View" button */
+  color: white;
+  border: none;
+}
+
+.swal2-confirm:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.swal2-cancel {
+  background-color: #dc3545; /* Red for "Delete" button */
+  color: white;
+  border: none;
+}
+
+.swal2-cancel:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  /* Adjust calendar container padding and font size on small screens */
+  .calendar-container {
+    padding: 15px;
+  }
+
+  /* Adjust the month navigation font size and layout */
+  .month-nav h2 {
+    font-size: 1.25rem;
+  }
+
+  .month-nav button {
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Calendar controls stack vertically on small screens */
+  .calendar-controls {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .calendar-controls button {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  /* Calendar events reduce padding on small screens */
+  ::ng-deep .cal-event-title {
+    font-size: 0.875rem;
+    padding: 5px;
+  }
+
+  /* Show full names of the days of the week on small screens */
+  ::ng-deep .cal-header .cal-cell {
+    text-align: center;
+    white-space: normal; /* Allow wrapping of text */
+    text-overflow: clip; /* No ellipsis */
+    overflow: visible;
+  }
+
+  /* Month and Day View responsive adjustments */
+  ::ng-deep .cal-month-view, ::ng-deep .cal-day-view {
+    font-size: 0.875rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Adjust font size and padding for medium screens */
+  .calendar-container {
+    padding: 18px;
+  }
+
+  .month-nav h2 {
+    font-size: 1.35rem;
+  }
+
+  /* Adjust calendar controls for medium screens */
+  .calendar-controls button {
+    padding: 8px 12px;
+  }
+
+  /* Medium screen calendar event adjustments */
+  ::ng-deep .cal-event-title {
+    font-size: 1rem;
+    padding: 7px;
+  }
+}

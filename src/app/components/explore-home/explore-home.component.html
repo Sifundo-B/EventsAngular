@@ -1,0 +1,63 @@
+<div class="container mx-auto p-4 pb-20 w-full h-full overflow-hidden">
+
+  <h1 class="text-3xl font-bold text-white mt-5">Explore Events</h1>
+  <p class="text-lg text-gray-600 text-white mb-6">Discover the best events happening around you.</p>
+
+  <!-- Carousel for Event Categories -->
+  <div class="carousel-container mb-6">
+    <div class="carousel flex overflow-x-scroll">
+      <!-- All Button -->
+      <div class="category-item mr-4 cursor-pointer text-white" 
+           [class.active]="selectedCategory === null" 
+           (click)="showAllEvents()">
+        <div class="bg-blue-600 rounded-full p-3 category-button">
+          <span>All</span>
+        </div>
+      </div>
+
+      <!-- Category Buttons -->
+      <div *ngFor="let category of categories" 
+           class="category-item mr-4 cursor-pointer text-white" 
+           [class.active]="selectedCategory === category.id" 
+           (click)="filterEventsByCategory(category.id)">
+        <div class="bg-blue-600 rounded-full p-3 category-button">
+          <span>{{ category.name }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h1 class="text-2xl font-bold mb-4 text-white">All Events</h1>
+  <div *ngIf="events.length === 0" class="text-center text-gray-500">
+    There are currently no events.
+  </div>
+  <div *ngIf="filteredEvents.length > 0">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div *ngFor="let event of filteredEvents" 
+           class="rounded-lg shadow-md p-4 cursor-pointer" 
+           [ngStyle]="{'background-color': event.backgroundColor}"
+           (click)="viewEventDetails(event.id)">
+        <img [src]="event.imageUrl" 
+             alt="{{ event.name }}" 
+             class="w-full h-48 object-cover rounded-md mb-4" 
+             (error)="event.imageUrl = 'path/to/placeholder.jpg'">
+        <h2 class="text-xl font-semibold mb-2 text-white">{{ event.name }}</h2>
+        <p class="text-gray-600 mb-2 text-white">{{ event.date | date:'MMM d, y' }}</p>
+        <p class="text-gray-800 text-white">{{ event.description }}</p>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <button *ngIf="!showAll" 
+              (click)="showAllEvents()" 
+              class="py-2 px-4 bg-blue-600 text-white rounded">Show All Events</button>
+      <button *ngIf="showAll" 
+              (click)="hideAdditionalEvents()" 
+              class="py-2 px-4 bg-gray-400 text-white rounded">Show Less</button>
+    </div>
+  </div>
+
+  <!-- No Events Message -->
+  <div *ngIf="filteredEvents.length === 0" class="flex justify-center items-center h-64"> 
+    <p class="text-center text-gray-500 text-lg">No events available in this category.</p>
+  </div>
+</div>

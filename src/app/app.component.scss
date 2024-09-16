@@ -1,0 +1,15 @@
+/* Ensure main content does not overlap with navbar */
+.pt-16 {
+    padding-top: 4rem; 
+  }
+  
+  /* Toolbar fixed at bottom for mobile devices */
+  @media (max-width: 767px) {
+    .app-toolbar {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      z-index: 100;
+    }
+  }
+  
